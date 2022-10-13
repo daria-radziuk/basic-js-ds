@@ -20,29 +20,11 @@ class BinarySearchTree {
     this.root = null;
   }
 
-  root(data) {
-    let newNode = new Node(data);
-    if (this.root === null) {
-        this.root = newNode;
-    } else {
-        this.rootNode(this.root, newNode); 
-    }
-  }
-
-  rootNode(node, newNode) {
-    if (newNode.data < node.data) {
-        if (node.left === null) {
-            node.left = newNode;
-        } else {
-            this.rootNode(node.left, newNode);
-        }
-    } else {
-        if (node.right === null) {
-            node.right = newNode;
-        } else {
-            this.rootNode(node.right, newNode);
-        }
-    }
+  root() {
+   /* if (!this.root) {
+      return null;
+    }*/
+    return this.root;
 }
 
   add(data) {
@@ -70,7 +52,7 @@ class BinarySearchTree {
   has(data) {
     return searchInside(this.root, data);
 
-    function searchInside(node,data) {
+    function searchInside(node, data) {
       if (!node) {
         return false;
       }
@@ -79,22 +61,31 @@ class BinarySearchTree {
         return true;
       }
 
-      return data < node.data ?
-      searchInside(node.left, data):
-      searchInside(node.right, data);
+      if (node.data < data) {
+        return searchInside(node.right, data);
+      } else {
+        return searchInside(node.left, data);
+      }
     }
   }
+  find(data) {
+    return searchNode(this.root, data);
 
-  find(node,data) {
-      if (node === null) {
-          return null;
-      } else if (data < node.data) {
-          return this.search(node.left, data);
-      } else if (data > node.data) {
-          return this.search(node.right, data);
-      } else {
-          return node;
+    function searchNode(node, data) {
+      if (!node) {
+        return null;
       }
+
+      if (node.data === data) {
+        return node;
+      }
+
+      if (node.data < data) {
+        return searchNode(node.right, data);
+      } else {
+        return searchNode(node.left, data);
+      }
+    }
   }
 
   remove(data) {
@@ -165,7 +156,7 @@ class BinarySearchTree {
   
 }
 
-function rootItems() {
+/*function rootItems() {
   return item.root;
 }
 
@@ -194,7 +185,7 @@ removeItems();
 hasItems();
 findItems();
 rootItems();
-
+*/
 
 module.exports = {
   BinarySearchTree

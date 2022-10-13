@@ -35,7 +35,7 @@ class Stack {
 
 }
 
-const figures = new Stack();
+/*const figures = new Stack();
 
 figures.push(1);
 
@@ -43,7 +43,7 @@ figures.peek();
 
 figures.pop();
 
-figures.pop();
+figures.pop();*/
 
 module.exports = {
   Stack
